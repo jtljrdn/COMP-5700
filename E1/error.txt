@@ -1,0 +1,95 @@
+Error #1: generated code assumed BERT model existed in directory
+
+❯ /Users/admin/Documents/coding_stuff/COMP-5700/.venv/bin/python /Users/admin/Documents/coding_stuff/COMP-5700/E1/llm.py
+Traceback (most recent call last):
+  File "/Users/admin/Documents/coding_stuff/COMP-5700/.venv/lib/python3.14/site-packages/transformers/utils/hub.py", line 438, in cached_files
+    hf_hub_download(
+    ~~~~~~~~~~~~~~~^
+        path_or_repo_id,
+        ^^^^^^^^^^^^^^^^
+    ...<10 lines>...
+        tqdm_class=tqdm_class,
+        ^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/admin/Documents/coding_stuff/COMP-5700/.venv/lib/python3.14/site-packages/huggingface_hub/utils/_validators.py", line 84, in _inner_fn
+    validate_repo_id(arg_value)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "/Users/admin/Documents/coding_stuff/COMP-5700/.venv/lib/python3.14/site-packages/huggingface_hub/utils/_validators.py", line 138, in validate_repo_id
+    raise HFValidationError(
+    ...<3 lines>...
+    )
+huggingface_hub.errors.HFValidationError: Repo id must use alphanumeric chars, '-', '_' or '.'. The name cannot start or end with '-' or '.' and the maximum length is 96: './fine_tuned_bert'.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/admin/Documents/coding_stuff/COMP-5700/.venv/lib/python3.14/site-packages/transformers/models/auto/tokenization_auto.py", line 773, in from_pretrained
+    config = AutoConfig.from_pretrained(
+        pretrained_model_name_or_path, trust_remote_code=trust_remote_code, **kwargs
+    )
+  File "/Users/admin/Documents/coding_stuff/COMP-5700/.venv/lib/python3.14/site-packages/transformers/models/auto/configuration_auto.py", line 388, in from_pretrained
+    config_dict, unused_kwargs = PreTrainedConfig.get_config_dict(pretrained_model_name_or_path, **kwargs)
+                                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/admin/Documents/coding_stuff/COMP-5700/.venv/lib/python3.14/site-packages/transformers/configuration_utils.py", line 747, in get_config_dict
+    config_dict, kwargs = cls._get_config_dict(pretrained_model_name_or_path, **kwargs)
+                          ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/admin/Documents/coding_stuff/COMP-5700/.venv/lib/python3.14/site-packages/transformers/configuration_utils.py", line 802, in _get_config_dict
+    resolved_config_file = cached_file(
+        pretrained_model_name_or_path,
+    ...<9 lines>...
+        _commit_hash=commit_hash,
+    )
+  File "/Users/admin/Documents/coding_stuff/COMP-5700/.venv/lib/python3.14/site-packages/transformers/utils/hub.py", line 294, in cached_file
+    file = cached_files(path_or_repo_id=path_or_repo_id, filenames=[filename], **kwargs)
+  File "/Users/admin/Documents/coding_stuff/COMP-5700/.venv/lib/python3.14/site-packages/transformers/utils/hub.py", line 496, in cached_files
+    raise OSError(f"{e}") from e
+OSError: Repo id must use alphanumeric chars, '-', '_' or '.'. The name cannot start or end with '-' or '.' and the maximum length is 96: './fine_tuned_bert'.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/admin/Documents/coding_stuff/COMP-5700/.venv/lib/python3.14/site-packages/transformers/utils/hub.py", line 438, in cached_files
+    hf_hub_download(
+    ~~~~~~~~~~~~~~~^
+        path_or_repo_id,
+        ^^^^^^^^^^^^^^^^
+    ...<10 lines>...
+        tqdm_class=tqdm_class,
+        ^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/admin/Documents/coding_stuff/COMP-5700/.venv/lib/python3.14/site-packages/huggingface_hub/utils/_validators.py", line 84, in _inner_fn
+    validate_repo_id(arg_value)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "/Users/admin/Documents/coding_stuff/COMP-5700/.venv/lib/python3.14/site-packages/huggingface_hub/utils/_validators.py", line 138, in validate_repo_id
+    raise HFValidationError(
+    ...<3 lines>...
+    )
+huggingface_hub.errors.HFValidationError: Repo id must use alphanumeric chars, '-', '_' or '.'. The name cannot start or end with '-' or '.' and the maximum length is 96: './fine_tuned_bert'.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/admin/Documents/coding_stuff/COMP-5700/E1/llm.py", line 8, in <module>
+    tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH)
+  File "/Users/admin/Documents/coding_stuff/COMP-5700/.venv/lib/python3.14/site-packages/transformers/models/auto/tokenization_auto.py", line 777, in from_pretrained
+    config = PreTrainedConfig.from_pretrained(pretrained_model_name_or_path, **kwargs)
+  File "/Users/admin/Documents/coding_stuff/COMP-5700/.venv/lib/python3.14/site-packages/transformers/configuration_utils.py", line 706, in from_pretrained
+    config_dict, kwargs = cls.get_config_dict(pretrained_model_name_or_path, **kwargs)
+                          ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/admin/Documents/coding_stuff/COMP-5700/.venv/lib/python3.14/site-packages/transformers/configuration_utils.py", line 747, in get_config_dict
+    config_dict, kwargs = cls._get_config_dict(pretrained_model_name_or_path, **kwargs)
+                          ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/admin/Documents/coding_stuff/COMP-5700/.venv/lib/python3.14/site-packages/transformers/configuration_utils.py", line 802, in _get_config_dict
+    resolved_config_file = cached_file(
+        pretrained_model_name_or_path,
+    ...<9 lines>...
+        _commit_hash=commit_hash,
+    )
+  File "/Users/admin/Documents/coding_stuff/COMP-5700/.venv/lib/python3.14/site-packages/transformers/utils/hub.py", line 294, in cached_file
+    file = cached_files(path_or_repo_id=path_or_repo_id, filenames=[filename], **kwargs)
+  File "/Users/admin/Documents/coding_stuff/COMP-5700/.venv/lib/python3.14/site-packages/transformers/utils/hub.py", line 496, in cached_files
+    raise OSError(f"{e}") from e
+OSError: Repo id must use alphanumeric chars, '-', '_' or '.'. The name cannot start or end with '-' or '.' and the maximum length is 96: './fine_tuned_bert'.
+

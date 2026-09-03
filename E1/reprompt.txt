@@ -1,0 +1,14 @@
+Reprompt #1: Pasted in the error with no other instructions
+
+Reprompt #2: Pasted in new error plus context that we don't have a model to use in the directory
+
+"❯ /Users/admin/Documents/coding\_stuff/COMP-5700/.venv/bin/python /Users/admin/Documents/coding\_stuff/COMP-5700/E1/llm.py
+Traceback (most recent call last):
+&#x20; File "/Users/admin/Documents/coding\_stuff/COMP-5700/E1/llm.py", line 12, in \<module>
+&#x20;   raise FileNotFoundError(
+&#x20;   ...<2 lines>...
+&#x20;   )
+FileNotFoundError: Fine-tuned model directory not found: /Users/admin/Documents/coding\_stuff/COMP-5700/E1/fine\_tuned\_bert
+Update MODEL\_PATH to the directory where you saved your model.
+
+We don't have a model in our directory"

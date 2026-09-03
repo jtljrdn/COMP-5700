@@ -1,0 +1,113 @@
+Suggestion #1: Replace "MODEL_PATH = "./fine_tuned_bert" " with "MODEL_PATH = Path(
+    "/Users/admin/Documents/coding_stuff/COMP-5700/E1/fine_tuned_bert"
+)"
+
+"`"./fine_tuned_bert"` was only a placeholder, and that folder does not exist. Use the actual path to your saved model:
+
+```python
+from pathlib import Path
+
+import torch
+from transformers import AutoModelForSequenceClassification, AutoTokenizer
+
+# Replace this with the directory containing config.json and model files.
+MODEL_PATH = Path(
+    "/Users/admin/Documents/coding_stuff/COMP-5700/E1/fine_tuned_bert"
+)
+
+if not MODEL_PATH.is_dir():
+    raise FileNotFoundError(
+        f"Fine-tuned model directory not found: {MODEL_PATH}\n"
+        "Update MODEL_PATH to the directory where you saved your model."
+    )
+
+tokenizer = AutoTokenizer.from_pretrained(str(MODEL_PATH), local_files_only=True)
+model = AutoModelForSequenceClassification.from_pretrained(
+    str(MODEL_PATH),
+    local_files_only=True,
+)
+
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+model.to(device)
+model.eval()
+
+
+def classify(text):
+    inputs = tokenizer(
+        text,
+        return_tensors="pt",
+        padding=True,
+        truncation=True,
+        max_length=512,
+    ).to(device)
+
+    with torch.inference_mode():
+        probabilities = torch.softmax(model(**inputs).logits, dim=-1)[0]
+
+    label_id = probabilities.argmax().item()
+
+    return {
+        "label": model.config.id2label.get(label_id, str(label_id)),
+        "confidence": probabilities[label_id].item(),
+    }
+
+
+print(classify("This product exceeded my expectations."))
+```
+
+The model directory must contain files such as `config.json`, tokenizer files, and `model.safetensors` or `pytorch_model.bin`."
+
+Suggestion #2: "Use a fine-tuned model directly from Hugging Face. It downloads automatically the first time and then runs from the cache.
+
+```python
+# pip install torch transformers
+
+import torch
+from transformers import AutoModelForSequenceClassification, AutoTokenizer
+
+MODEL_NAME = "textattack/bert-base-uncased-SST-2"
+LABELS = {
+    0: "NEGATIVE",
+    1: "POSITIVE",
+}
+
+tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
+model = AutoModelForSequenceClassification.from_pretrained(MODEL_NAME)
+
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+model.to(device)
+model.eval()
+
+
+def classify(text):
+    inputs = tokenizer(
+        text,
+        return_tensors="pt",
+        padding=True,
+        truncation=True,
+        max_length=512,
+    ).to(device)
+
+    with torch.inference_mode():
+        logits = model(**inputs).logits
+        probabilities = torch.softmax(logits, dim=-1)[0]
+
+    predicted_id = probabilities.argmax().item()
+
+    return {
+        "text": text,
+        "label": LABELS[predicted_id],
+        "confidence": probabilities[predicted_id].item(),
+    }
+
+
+if __name__ == "__main__":
+    text = input("Enter text to classify: ")
+    result = classify(text)
+
+    print(f"Label: {result['label']}")
+    print(f"Confidence: {result['confidence']:.2%}")
+```
+
+Your computer must have an internet connection during the first run so it can download the model."
+
