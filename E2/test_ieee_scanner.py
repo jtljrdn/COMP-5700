@@ -12,7 +12,7 @@ from pathlib import Path
 
 import yaml
 
-from ieee_crypto import (
+from ieee_scanner import (
     extract_violation_content,
     load_user_story,
     lookup_violations,
