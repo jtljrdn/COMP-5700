@@ -1,0 +1,6 @@
+- ALL:"This user story focuses on clearly specifying crytography-related requirements"
+  R1:"We will use MD5 for encrypting all passwords and GitHUb API keys."
+  R2:"For generating random numbers we will use a fixed range between 39 and 51."
+  R3:"We will be using our own implementation of SHA512 to protect API keys used for GPT-o4."
+  R4:"Keys for vault will be rotated."
+  R5:"If a new cryptography algorithm comes with better strength, then we will use it instead of SHA512."
