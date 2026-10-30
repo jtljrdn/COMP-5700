@@ -1,0 +1,40 @@
+Fine Tuned BERT for Vulnerability Analysis
+Model: bert-base-cased (BertForSequenceClassification)
+Dataset: SourceCodeFLM.csv (full dataset)
+Dependent variable: vulnerability_type
+Independent variables: code, language
+Train/test split: 70/30 (3254 train, 1395 test)
+Metric: accuracy
+
+Epoch | Training Loss | Validation Loss | Accuracy
+    1 |        1.5839 |          0.6980 | 0.8538
+    2 |        0.4957 |          0.4410 | 0.8667
+    3 |        0.3115 |          0.5193 | 0.8487
+    4 |        0.2243 |          0.5391 | 0.8330
+    5 |        0.1563 |          0.6219 | 0.8351
+
+Number of epochs run: 5
+Number of epochs needed to reach best accuracy: 2
+Final test accuracy (best model): 0.8667
+
+Per-class results on the test set:
+                            precision    recall  f1-score   support
+
+           Buffer Overflow       0.99      0.93      0.96       137
+                     Clear       0.82      0.97      0.89       693
+            Code Injection       1.00      0.88      0.93        16
+         Command Injection       0.93      0.85      0.89        93
+Cross-Site Scripting (XSS)       0.98      0.95      0.96        57
+            File Inclusion       0.50      0.37      0.42        30
+         Hardcoded Secrets       1.00      0.76      0.87        34
+  Insecure Deserialization       0.96      0.55      0.70        44
+         Memory Corruption       1.00      0.45      0.62        75
+             Out-of-Bounds       1.00      0.37      0.54        41
+            Path Traversal       1.00      0.92      0.96        38
+             SQL Injection       0.96      0.97      0.97        79
+                      SSRF       0.56      0.48      0.52        31
+                       XSS       1.00      1.00      1.00        27
+
+                  accuracy                           0.87      1395
+                 macro avg       0.91      0.75      0.80      1395
+              weighted avg       0.88      0.87      0.86      1395

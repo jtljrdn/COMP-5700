@@ -1,0 +1,5 @@
+Missing keys when loading BertForSequenceClassification from bert-base-cased:
+classifier.bias
+classifier.weight
+
+These classifier head weights are not in the pre-trained checkpoint, so they are newly initialized and learned during fine tuning.
